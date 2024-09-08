@@ -32,8 +32,8 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     options.Password.RequiredLength = 12;
 })
 .AddEntityFrameworkStores<ApplicationDBContext>()
-.AddSignInManager<SignInManager<AppUser>>()  // Explicitly add SignInManager
-.AddDefaultTokenProviders();  // Ensure token providers are available for things like password reset
+.AddSignInManager<SignInManager<AppUser>>()
+.AddDefaultTokenProviders();
 
 // JWT Authentication Setup
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -49,8 +49,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         IssuerSigningKey = new SymmetricSecurityKey(
             System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"])
         ),
-        ValidateLifetime = true, // Ensure tokens are validated for expiration
-        ClockSkew = TimeSpan.Zero // Optional: Eliminate clock skew to prevent small time mismatches
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
     };
 });
 
@@ -80,11 +80,11 @@ builder.Services.AddSwaggerGen(option =>
             {
                 Reference = new OpenApiReference
                 {
-                    Type=ReferenceType.SecurityScheme,
-                    Id="Bearer"
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
                 }
             },
-            new string[]{}
+            new string[] { }
         }
     });
 });
@@ -104,16 +104,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection(); // Default configuration for HTTPS redirection
 
-// Enable routing before authentication/authorization
-app.UseRouting();
+app.UseRouting(); // Ensure routing is configured before authentication/authorization
 
-// Ensure Authentication and Authorization middleware is configured correctly
-app.UseAuthentication();
+app.UseAuthentication(); // Ensure authentication is applied before authorization
 app.UseAuthorization();
 
-// Enable routing and map controller endpoints
 app.MapControllers();
 
 app.Run();

@@ -146,3 +146,4 @@ D:\Desktop\.net\api\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFramewo
 D:\Desktop\.net\api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 D:\Desktop\.net\api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 D:\Desktop\.net\api\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\Desktop\.net\api\obj\Debug\net8.0\api.sourcelink.json
