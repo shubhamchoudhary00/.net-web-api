@@ -95,6 +95,13 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 });
 
+// Configure Logging
+builder.Services.AddLogging(logging =>
+{
+    logging.ClearProviders();
+    logging.AddConsole();
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -103,6 +110,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Apply CORS policy
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection(); // Default configuration for HTTPS redirection
 
